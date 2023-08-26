@@ -185,7 +185,7 @@ function EmptyCart() {
 
 function purchaseButton() {
     let cartRow = document.querySelector('.cart-row')
-
+   
         if (cartRow == null ) {
         alert('No Items in Cart: Add items to cart to purchase')
         } else {
@@ -213,9 +213,19 @@ function addToCartButton(event) {
     let productImg = ElementClicked.querySelectorAll('.product-img')[0].src
     let productName = ElementClicked.querySelectorAll('.product-name')[0].innerText
     let productPrice = ElementClicked.querySelectorAll('.product-price')[0].innerText
-        addToCart(productImg, productName, productPrice)
-        updateCartTotal()
-        EmptyCart()
+
+    //Code added to Alert when items been added to cart
+    let cartItemName = document.querySelectorAll('.cart-item');
+    for (let i = 0; i < cartItemName.length; i++) {
+        if (cartItemName[i].innerText == productName) {
+            alert('Item has already been added');
+            return; 
+        }
+    }
+    addToCart(productImg, productName, productPrice)
+    alert('Added to cart')
+    updateCartTotal()
+    EmptyCart()
 }
 
 function addToCart(productImg, productName, productPrice) {
@@ -223,14 +233,15 @@ function addToCart(productImg, productName, productPrice) {
     let createRow = document.createElement('div')
     createRow.classList.add('cart-row')
     let cartItems = document.querySelector('.cart-items')
-    let cartItemName = document.querySelectorAll('.cart-item')
-    console.log(cartItems)
-        for(let i = 0; i < cartItemName.length; i++) {
-            if (cartItemName[i].innerText == productName)  {
-                alert('Item has already been added')
-                return
-            }
-        }
+    // Moved up above to notify when item added
+    // let cartItemName = document.querySelectorAll('.cart-item')
+   
+        // for(let i = 0; i < cartItemName.length; i++) {
+        //     if (cartItemName[i].innerText == productName)  {
+        //         alert('Item has already been added')
+        //         return
+        //     }
+        // }
     let cartRowContent = 
             `   
                <div class='cart-image-container'>
